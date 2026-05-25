@@ -1,0 +1,119 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import PortfolioGallery from '../components/PortfolioGallery.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<main>
+			<section class="hero">
+				<h1>Portfolio</h1>
+				<p class="tagline"><i>Visual Work & Creative Projects</i></p>
+				<p>
+					Welcome to my portfolio. Below you'll find a collection of my creative and professional work.
+				</p>
+				<p class="links">
+					<a href="https://github.com/example">GitHub</a>
+					<a href="mailto:example@gmail.com">Email</a>
+					<a href="https://linkedin.com">LinkedIn</a>
+				</p>
+			</section>
+
+			<PortfolioGallery />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.hero {
+		display: grid;
+		gap: 0.7rem;
+		border: 1px solid var(--border);
+		background: var(--surface);
+		padding: 1.5rem;
+		margin-bottom: 2rem;
+	}
+
+	.hero h1 {
+		margin: 0 0 0.5rem 0;
+	}
+
+	.tagline {
+		color: var(--muted);
+		margin: 0 0 1rem 0;
+		font-size: 0.95rem;
+	}
+
+	.hero > p:not(.tagline):not(.links) {
+		margin: 0 0 1rem 0;
+		line-height: 1.6;
+	}
+
+	.links {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		gap: 1.2rem;
+		flex-wrap: wrap;
+		margin: 0.5rem 0 0 0;
+		padding: 0;
+	}
+
+	.links a {
+		font-weight: 500;
+	}
+
+	@media (max-width: 640px) {
+		.hero {
+			padding: 1rem;
+			gap: 0.6rem;
+		}
+
+		.tagline {
+			margin: 0 0 0.8rem 0;
+		}
+
+		.hero > p:not(.tagline):not(.links) {
+			margin: 0 0 0.8rem 0;
+			font-size: 0.95rem;
+		}
+
+		.links {
+			gap: 0.8rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.hero {
+			padding: 0.8rem;
+			gap: 0.5rem;
+		}
+
+		.tagline {
+			font-size: 0.9rem;
+			margin: 0 0 0.6rem 0;
+		}
+
+		.hero > p:not(.tagline):not(.links) {
+			font-size: 0.9rem;
+			margin: 0 0 0.6rem 0;
+		}
+
+		.links {
+			gap: 0.6rem;
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+
+		.links a {
+			font-size: 0.9rem;
+		}
+	}
+</style>

@@ -1,0 +1,174 @@
+---
+// List of portfolio images - ordered for optimal visual balance
+const images = [
+	'IMG_6811.jpg',      // landscape
+	'IMG_0307.JPG',      // portrait
+	'IMG_7129.jpg',      // landscape
+	'DSCF6633.jpg',      // portrait
+	'IMG_6577.jpg',      // landscape
+	'IMG_1106.jpg',      // portrait
+	'IMG_7145.jpg',      // landscape
+	'DSCF1016.JPG',      // landscape
+	'IMG_6047.jpg',      // portrait
+	'IMG_7104.jpg',      // landscape
+	'IMG_5966.jpg',      // portrait
+	'IMG_6861.jpg',      // landscape
+	'IMG_7121.jpg',      // portrait
+	'IMG_6037.jpg',      // landscape
+	'DSCF6607.jpg',      // portrait
+];
+---
+
+<section class="portfolio-section">
+	<h2>Portfolio</h2>
+	<div class="gallery-grid">
+		{images.map((image) => (
+			<div class="gallery-item">
+				<img 
+					src={`/portfolio/${image}`} 
+					alt={`Portfolio image ${image}`}
+					loading="lazy"
+					class="gallery-image"
+					data-src={`/portfolio/${image}`}
+				/>
+			</div>
+		))}
+	</div>
+
+	<!-- Fullscreen Modal -->
+	<div class="fullscreen-modal" id="fullscreenModal">
+		<img class="fullscreen-image" id="fullscreenImage" src="" alt="Fullscreen view" />
+	</div>
+</section>
+
+<style>
+	.portfolio-section {
+		margin: 4rem 0;
+	}
+
+	.portfolio-section h2 {
+		margin-bottom: 2rem;
+	}
+
+	.gallery-grid {
+		column-count: 3;
+		column-gap: 1.5rem;
+		margin-bottom: 4rem;
+	}
+
+	.gallery-item {
+		break-inside: avoid;
+		margin-bottom: 1.5rem;
+		overflow: hidden;
+		border-radius: 8px;
+		background: var(--surface);
+		box-shadow: 0 2px 8px rgba(16, 24, 40, 0.08);
+		transition: transform 200ms ease, box-shadow 200ms ease, cursor 200ms ease;
+		cursor: pointer;
+	}
+
+	.gallery-item:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 8px 16px rgba(16, 24, 40, 0.12);
+	}
+
+	.gallery-item img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	/* Fullscreen Modal Styles */
+	.fullscreen-modal {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.95);
+		z-index: 1000;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+	}
+
+	.fullscreen-modal.active {
+		display: flex;
+	}
+
+	.fullscreen-image {
+		max-width: 95vw;
+		max-height: 95vh;
+		object-fit: contain;
+		cursor: pointer;
+		user-select: none;
+	}
+
+	@media (max-width: 1200px) {
+		.gallery-grid {
+			column-count: 2;
+			column-gap: 1.2rem;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.gallery-grid {
+			column-count: 2;
+			column-gap: 1rem;
+		}
+
+		.gallery-item {
+			margin-bottom: 1rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.gallery-grid {
+			column-count: 1;
+			column-gap: 0;
+		}
+
+		.gallery-item {
+			margin-bottom: 0.75rem;
+		}
+	}
+</style>
+
+<script>
+	const modal = document.getElementById('fullscreenModal');
+	const fullscreenImage = document.getElementById('fullscreenImage');
+	const galleryImages = document.querySelectorAll('.gallery-image');
+
+	function toggleFullscreen(src) {
+		if (modal.classList.contains('active')) {
+			modal.classList.remove('active');
+			document.body.style.overflow = '';
+		} else {
+			fullscreenImage.src = src;
+			modal.classList.add('active');
+			document.body.style.overflow = 'hidden';
+		}
+	}
+
+	// Add click listeners to all gallery images
+	galleryImages.forEach((img) => {
+		img.addEventListener('click', () => {
+			toggleFullscreen(img.dataset.src);
+		});
+	});
+
+	// Click on modal to close
+	modal.addEventListener('click', () => {
+		modal.classList.remove('active');
+		document.body.style.overflow = '';
+	});
+
+	// Close with Escape key
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape' && modal.classList.contains('active')) {
+			modal.classList.remove('active');
+			document.body.style.overflow = '';
+		}
+	});
+</script>

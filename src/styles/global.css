@@ -1,0 +1,304 @@
+@import "katex/dist/katex.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+	--font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+	--font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+	--bg: #f6f7f9;
+	--surface: #ffffff;
+	--muted: #6b7280;
+	--text: #0f1724;
+	--accent: #2563eb; /* scholarly blue */
+	--accent-2: #0ea5a4;
+	--border: #e6e9ee;
+	--radius: 4px;
+	--radius-soft: 8px;
+	--layout-max-width: 1100px;
+	--reading-max-width: 760px;
+	--code-bg: #f3f4f6;
+	--shadow-sm: 0 1px 4px rgba(16,24,40,0.04);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	font-family: var(--font-sans);
+	margin: 0;
+	padding: 0;
+	background: var(--bg);
+	color: var(--text);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 16px;
+	line-height: 1.6;
+}
+
+/* Layout */
+main {
+	max-width: var(--layout-max-width);
+	width: 100%;
+	margin: 48px auto;
+	padding: 0 20px;
+}
+
+.container {
+	max-width: var(--reading-max-width);
+	margin: 0 auto;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+	margin: 0 0 0.5rem 0;
+	color: var(--text);
+	line-height: 1.15;
+}
+
+h1 { font-size: 2.1rem; letter-spacing: -0.02em; font-weight: 700; }
+h2 { font-size: 1.45rem; margin-top: 0.7rem; font-weight: 600; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+
+/* Text elements */
+p { margin: 0 0 1rem 0; color: #0b1220; }
+.prose { color: #0b1220; }
+.prose p,
+.prose li,
+.prose blockquote,
+.prose td {
+	text-align: justify;
+	text-justify: inter-word;
+	hyphens: auto;
+}
+
+strong, b { color: var(--text); font-weight: 700; }
+
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: all 160ms ease; }
+a:hover { color: color-mix(in srgb, var(--accent) 80%, black); border-bottom-color: rgba(37,99,235,0.12); }
+
+/* Inputs */
+input, textarea, select { font-family: var(--font-mono); font-size: 15px; color: var(--text); }
+
+/* Images and media */
+img { max-width: 100%; height: auto; border-radius: 2px; display: block; }
+
+/* Code and preformatted */
+code { background: var(--code-bg); padding: 3px 6px; border-radius: 3px; font-size: 0.95em; }
+pre { background: var(--code-bg); padding: 0.9rem 1rem; border-radius: 4px; overflow: auto; border: 1px solid var(--border); box-shadow: none; }
+pre > code { display: block; white-space: pre; }
+
+/* Blockquote */
+blockquote { margin: 0; padding: 0.65rem 0.8rem; background: transparent; border-left: 3px solid var(--accent); border-radius: 0; color: var(--muted); }
+
+/* Horizontal rule */
+hr { border: none; height: 1px; background: var(--border); margin: 2rem 0; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+th, td { padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border); text-align: left; }
+
+/* Utility */
+.card { background: var(--surface); border-radius: var(--radius); padding: 1rem; box-shadow: none; border: 1px solid var(--border); }
+
+.muted { color: var(--muted); }
+
+.readable { max-width: var(--reading-max-width); margin: 0 auto; }
+
+/* Accessibility helpers */
+.sr-only { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }
+
+/* KaTeX */
+.katex { color: var(--text); }
+.katex-display { 
+	overflow-x: auto; 
+	padding: 1rem 0;
+	display: block;
+	text-align: center;
+}
+
+/* Utility class for centered equations */
+.center-equation {
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	margin: 1rem 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 720px) {
+	body { font-size: 16px; }
+	main { margin: 24px 0; padding: 0 16px; }
+	h1 { font-size: 1.4rem; }
+	h2 { font-size: 1.1rem; }
+	h3 { font-size: 0.95rem; }
+}
+
+@media (max-width: 480px) {
+	body { font-size: 14px; }
+	main { margin: 16px 0; padding: 0 16px; }
+	h1 { font-size: 1.2rem; }
+	h2 { font-size: 1rem; }
+	h3 { font-size: 0.9rem; }
+	p { font-size: 0.95rem; }
+	table { font-size: 0.85rem; }
+	th, td { padding: 0.35rem 0.4rem; }
+	pre { padding: 0.65rem 0.8rem; font-size: 0.8rem; }
+	code { font-size: 0.88em; padding: 2px 4px; }
+}
+
+/*
+ Improved, broad codeblock / syntax highlighting styles
+	 Targets: Shiki output (.shiki), Prism-like language classes, and plain Markdown code blocks (<pre><code>). */
+
+/* High-specificity base for any pre/code pair */
+pre[class*="language-"],
+code[class*="language-"],
+pre, pre > code,
+.shiki, pre.shiki, pre.shiki > code {
+	background: #0b1220 !important; /* dark surface for code */
+	color: #e6eef6 !important; /* fallback text color */
+	border: 1px solid rgba(11,18,32,0.12) !important;
+	border-radius: 8px !important;
+	padding: 0.8rem 1rem !important;
+	font-family: var(--font-mono) !important;
+	font-size: 0.95rem !important;
+	line-height: 1.45 !important;
+	overflow: auto !important;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Ensure code text does not appear faded by removing opacity inheritance */
+pre, pre * { opacity: 1 !important; }
+
+/* Override Astro-generated inline-styled code blocks (github-dark, astro-code, code-highlight) */
+pre.astro-code, pre.astro-code.github-dark, pre.astro-code.github-dark > code.code-highlight,
+.astro-code, .code-highlight {
+	background-color: #0b1220 !important;
+	border-color: rgba(230,238,246,0.06) !important;
+}
+
+/* Line container styling for Shiki/Prism rendered content */
+.shiki .line, pre.shiki .line, pre > code > .line { display: block; padding-left: 0.9rem; padding-right: 0.9rem; }
+.shiki .line:not(:last-child), pre.shiki .line:not(:last-child) { margin-bottom: 0.08rem; }
+
+/* Line numbers (if present) */
+.shiki .line-number, pre .line-number { display: inline-block; width: 3.2rem; text-align: right; padding-right: 1rem; margin-left: -1.9rem; color: rgba(230,238,246,0.28); user-select: none; }
+
+/* Common token color fallbacks (Shiki/Prism token classes) */
+.token.comment, .token.prolog, .token.doctype, .token.cdata { color: #7a869a; font-style: italic; }
+.token.keyword { color: #ff7ab6; }
+.token.selector { color: #ffd580; }
+.token.function { color: #60c5ff; }
+.token.tag { color: #ffb86b; }
+.token.attr-name { color: #ffd580; }
+.token.string { color: #9ae66e; }
+.token.number, .token.boolean { color: #f59e0b; }
+.token.operator { color: #e6eef6; }
+.token.punctuation { color: #c6cbd1; }
+
+/* Inline code on prose backgrounds */
+p code, li code, dd code { background: rgba(230,238,246,0.06); padding: 2px 6px; border-radius: 4px; color: #0b1220; }
+
+/* Responsive image cards used by the N-body writeup and similar posts */
+.image-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	margin: 1.25rem 0 1.75rem;
+}
+
+.image-grid--two .image-card {
+	flex: 1 1 320px;
+}
+
+.image-grid--three .image-card {
+	flex: 1 1 240px;
+}
+
+.image-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 1rem auto 2rem;
+	padding: 0.55rem;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-soft);
+	background: var(--surface);
+	box-shadow: var(--shadow-sm);
+	flex: 1 1 auto;
+	width: min(100%, 450px);
+	max-width: 450px;
+	overflow: hidden;
+}
+
+.image-card--wide {
+	width: min(100%, 720px);
+	max-width: 720px;
+}
+
+.image-card :is(img, picture) {
+	display: block;
+	cursor: zoom-in;
+	width: 100%;
+	max-width: 100%;
+	max-height: 400px;
+	height: auto;
+	object-fit: contain;
+}
+
+.image-card :is(img, picture) * {
+	cursor: zoom-in;
+}
+
+.image-card figcaption {
+	margin-top: 0.55rem;
+	color: var(--muted);
+	font-size: 0.92rem;
+	line-height: 1.45;
+	text-align: center;
+}
+
+@media (max-width: 720px) {
+	body { font-size: 15px; }
+	h1 { font-size: 1.35rem; }
+	h2 { font-size: 1.05rem; }
+	h3 { font-size: 0.95rem; }
+	p, .prose { font-size: 0.94rem; }
+	.image-grid { gap: 0.65rem; }
+	.image-card {
+		width: 100%;
+		max-width: 100%;
+		padding: 0.45rem;
+	}
+	.image-card--wide {
+		width: 100%;
+		max-width: 100%;
+	}
+	.image-card :is(img, picture) {
+		max-height: 320px;
+	}
+	.image-grid { gap: 0.75rem; }
+}
+
+@media (max-width: 480px) {
+	body { font-size: 13px; }
+	h1 { font-size: 1.15rem; }
+	h2 { font-size: 0.98rem; }
+	h3 { font-size: 0.9rem; }
+	p, .prose { font-size: 0.9rem; }
+	.image-card {
+		padding: 0.35rem;
+	}
+	.image-card :is(img, picture) {
+		max-height: 260px;
+	}
+	pre[class*="language-"], pre.shiki, pre > code { font-size: 0.82rem; padding: 0.6rem 0.75rem; }
+	.shiki .line-number, pre .line-number { width: 2.6rem; padding-right: 0.6rem; margin-left: -1.2rem; }
+}
+
